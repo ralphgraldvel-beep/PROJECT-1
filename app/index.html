@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1F3A68">
+  <title>Deck Review</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Every screen of the app is drawn inside this box by app.js -->
+  <div id="app"></div>
+
+  <!-- Pop-up box used for "Are you sure?" messages and the exam question map -->
+  <div id="modal" class="modal hidden"></div>
+
+  <!-- Order matters: questions first, then the app logic -->
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

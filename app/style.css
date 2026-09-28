@@ -1,0 +1,215 @@
+/* =========================================================
+   Deck Review – colors, fonts and layout
+   Colors match docs/DESIGN.md
+   ========================================================= */
+
+:root {
+  --navy: #1F3A68;
+  --sea: #2F80C9;
+  --green: #2E9E5B;
+  --red: #D64545;
+  --amber: #F2A900;
+  --bg: #F7F8FA;
+  --card: #FFFFFF;
+  --text: #1C1C1E;
+  --muted: #6B7280;
+  --line: #E3E6EB;
+  --green-bg: #E6F4EC;
+  --red-bg: #FBEAEA;
+  --sea-bg: #E8F1FA;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+  -webkit-tap-highlight-color: transparent;
+}
+#app { max-width: 640px; margin: 0 auto; min-height: 100vh; padding-bottom: 100px; }
+button { font: inherit; color: inherit; cursor: pointer; }
+.hidden { display: none !important; }
+
+/* ---------- Top bar ---------- */
+.topbar {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; gap: 6px;
+  background: var(--navy); color: #fff;
+  padding: calc(env(safe-area-inset-top, 0px) + 8px) 8px 8px 12px;
+  min-height: 56px;
+}
+.topbar h1 {
+  flex: 1; margin: 0; font-size: 19px; font-weight: 600;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.icon-btn {
+  background: none; border: none; color: #fff;
+  font-size: 24px; line-height: 1; padding: 8px 10px;
+  border-radius: 8px; min-width: 44px; min-height: 44px;
+}
+.icon-btn:active { background: rgba(255, 255, 255, .15); }
+.icon-btn .star-on { color: var(--amber); }
+.counter { font-size: 16px; font-weight: 600; white-space: nowrap; }
+.timer {
+  font-variant-numeric: tabular-nums; font-weight: 700; font-size: 18px;
+  background: rgba(255, 255, 255, .15); padding: 4px 10px; border-radius: 8px;
+}
+.timer.warn { background: var(--red); }
+
+/* ---------- General ---------- */
+.page { padding: 16px; }
+.card {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 14px; padding: 14px 16px; margin-bottom: 12px;
+}
+.card.tap { display: block; width: 100%; text-align: left; }
+.card.tap:active { background: #F0F3F7; }
+.muted { color: var(--muted); font-size: 14px; }
+.section-title {
+  font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--muted); margin: 22px 4px 8px;
+}
+.bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; margin-top: 8px; }
+.bar > span { display: block; height: 100%; background: var(--sea); }
+.subject-name { font-weight: 600; font-size: 17px; }
+.continue { background: var(--navy); color: #fff; border: none; }
+.continue .muted { color: #C9D4E8; }
+.continue.tap:active { background: #2A4A80; }
+.empty { text-align: center; color: var(--muted); padding: 48px 20px; }
+
+/* ---------- Subject detail ---------- */
+h2.title { font-size: 22px; margin: 4px 0 2px; }
+.counters {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px;
+  text-align: center; margin: 18px 0;
+}
+.counters b { display: block; font-size: 24px; color: var(--sea); }
+.counters b.red { color: var(--red); }
+.counters span { font-size: 13px; color: var(--muted); }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.tile {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  padding: 14px 6px; text-align: center; font-size: 14px; font-weight: 500;
+}
+.tile .ic {
+  display: flex; align-items: center; justify-content: center;
+  width: 52px; height: 52px; margin: 0 auto 8px;
+  border-radius: 14px; background: var(--sea-bg); font-size: 26px;
+}
+.tile.exam .ic { background: var(--red-bg); }
+.tile:disabled { opacity: .4; cursor: default; }
+
+/* ---------- Question screen ---------- */
+.qtext { font-size: 18px; margin: 6px 0 18px; }
+.choice {
+  display: flex; align-items: center; gap: 14px;
+  width: 100%; text-align: left;
+  background: var(--card); border: 1.5px solid var(--line); border-radius: 14px;
+  padding: 12px 14px; margin-bottom: 10px; font-size: 17px;
+}
+.choice .letter {
+  flex: 0 0 40px; height: 40px; border-radius: 50%;
+  border: 1.5px solid var(--sea); color: var(--sea);
+  display: flex; align-items: center; justify-content: center; font-weight: 600;
+}
+.choice:disabled { cursor: default; color: var(--text); }
+.choice.selected { border-color: var(--sea); background: var(--sea-bg); }
+.choice.selected .letter { background: var(--sea); color: #fff; }
+.choice.correct { border-color: var(--green); background: var(--green-bg); }
+.choice.correct .letter { background: var(--green); border-color: var(--green); color: #fff; }
+.choice.wrong { border-color: var(--red); background: var(--red-bg); }
+.choice.wrong .letter { background: var(--red); border-color: var(--red); color: #fff; }
+.feedback { border-radius: 14px; padding: 14px 16px; margin-top: 6px; }
+.feedback.ok { background: var(--green-bg); }
+.feedback.bad { background: var(--red-bg); }
+.feedback h3 { margin: 0 0 6px; font-size: 17px; }
+.sample-tag {
+  display: inline-block; font-size: 12px; font-weight: 600;
+  color: #8A5A00; background: #FFF3D1; border-radius: 6px;
+  padding: 2px 8px; margin-bottom: 8px;
+}
+
+/* ---------- Bottom bars (Prev/Next and tabs) ---------- */
+.bottom {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+  background: var(--card); border-top: 1px solid var(--line);
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+}
+.bottom-inner { max-width: 640px; margin: 0 auto; display: flex; gap: 10px; }
+.bottom.tabs { padding-top: 4px; padding-bottom: calc(4px + env(safe-area-inset-bottom, 0px)); }
+.tab {
+  flex: 1; background: none; border: none;
+  display: flex; flex-direction: column; align-items: center;
+  font-size: 12px; color: var(--muted); padding: 6px 2px;
+}
+.tab .ic { font-size: 22px; line-height: 1.2; }
+.tab.active { color: var(--navy); font-weight: 700; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  flex: 1; border: 1.5px solid var(--navy); background: var(--card); color: var(--navy);
+  border-radius: 12px; padding: 12px; font-size: 16px; font-weight: 600;
+}
+.btn.primary { background: var(--navy); color: #fff; }
+.btn.danger { background: var(--red); border-color: var(--red); color: #fff; }
+.btn:disabled { opacity: .4; cursor: default; }
+.btn.block { display: block; width: 100%; margin-top: 12px; }
+
+/* ---------- Exam setup choices ---------- */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  border: 1.5px solid var(--line); background: var(--card);
+  border-radius: 999px; padding: 8px 18px; font-weight: 600;
+}
+.chip.on { border-color: var(--navy); background: var(--navy); color: #fff; }
+.info-line { margin: 4px 0; }
+
+/* ---------- Results ---------- */
+.score { text-align: center; padding: 24px 16px; }
+.score .big { font-size: 44px; font-weight: 800; line-height: 1.1; }
+.badge {
+  display: inline-block; padding: 6px 18px; border-radius: 999px;
+  font-weight: 800; letter-spacing: .08em; color: #fff;
+}
+.badge.pass { background: var(--green); }
+.badge.fail { background: var(--red); }
+details.review {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 12px; margin-bottom: 8px; padding: 0 14px;
+}
+details.review summary { padding: 12px 0; cursor: pointer; list-style: none; display: flex; gap: 10px; }
+details.review summary::-webkit-details-marker { display: none; }
+details.review[open] summary { border-bottom: 1px solid var(--line); }
+.mark { font-weight: 800; }
+.mark.ok { color: var(--green); }
+.mark.bad { color: var(--red); }
+.review-line { margin: 8px 0; font-size: 15px; }
+
+/* ---------- Progress ---------- */
+table.history { width: 100%; border-collapse: collapse; font-size: 14px; }
+table.history th, table.history td { padding: 8px 4px; border-bottom: 1px solid var(--line); text-align: left; }
+.pass-text { color: var(--green); font-weight: 700; }
+.fail-text { color: var(--red); font-weight: 700; }
+
+/* ---------- Pop-up (modal) ---------- */
+.modal {
+  position: fixed; inset: 0; z-index: 50;
+  background: rgba(10, 20, 40, .5);
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+}
+.modal-box { background: var(--card); border-radius: 16px; padding: 20px; width: 100%; max-width: 420px; }
+.modal-box h3 { margin: 0 0 8px; }
+.modal-actions { display: flex; gap: 10px; margin-top: 18px; }
+.map {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;
+  max-height: 50vh; overflow: auto; margin: 12px 0;
+}
+.map button {
+  aspect-ratio: 1; border: 1.5px solid var(--line); background: var(--card);
+  border-radius: 10px; font-weight: 600;
+}
+.map button.done { background: var(--sea-bg); border-color: var(--sea); }
+.map button.here { border-color: var(--navy); border-width: 3px; }
